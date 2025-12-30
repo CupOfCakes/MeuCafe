@@ -1,0 +1,153 @@
+:root {
+    /* Paleta Café */
+    --brand: #FFDD00;        /* Amarelo vibrante para o CTA (cor clássica do BMC) */
+    --coffee-dark: #3d2b1f;  /* Marrom profundo para textos e títulos */
+    --coffee-medium: #6f4e37; /* Marrom médio para detalhes */
+    --cream: #fdfaf7;        /* Bege bem clarinho para o fundo, menos frio que o branco */
+    --text: #4a4a4a;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    color: var(--text);
+    line-height: 1.6;
+    background-color: var(--cream); /* Fundo mais quente */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 10%;
+    background: #fff;
+    border-bottom: 1px solid #f0e6dd;
+}
+
+.logo { 
+    font-weight: 800; 
+    font-size: 1.4rem; 
+    color: var(--coffee-dark); 
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--coffee-dark);
+    margin-left: 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background: var(--coffee-dark);
+    color: #fff !important;
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px; /* Mais arredondado, vibe mais amigável */
+}
+
+.hero-section {
+    text-align: center;
+    padding: 8rem 15%;
+    /* Gradiente que lembra um café com leite suave */
+    background: linear-gradient(to bottom, #fff, #f4eee8);
+}
+
+.hero-section h1 {
+    font-size: 3.8rem;
+    letter-spacing: -2px;
+    margin-bottom: 1.5rem;
+    color: var(--coffee-dark);
+}
+
+.hero-section p {
+    font-size: 1.2rem;
+    color: var(--coffee-medium);
+    max-width: 700px;
+    margin: 0 auto 2.5rem;
+}
+
+.btn-main {
+    background: var(--brand);
+    color: #000;
+    border: none;
+    padding: 1.2rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 221, 0, 0.3);
+    transition: all 0.2s;
+}
+
+.btn-main:hover { 
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 221, 0, 0.4);
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 5rem 10%;
+    background-color: var(--cream);
+}
+
+.feature-card {
+    padding: 2rem;
+    background: #fff;
+    border: 1px solid #ede0d4;
+    border-radius: 20px;
+    transition: border-color 0.3s;
+}
+
+.feature-card:hover {
+    border-color: var(--coffee-medium);
+}
+
+.feature-card h3 {
+    color: var(--coffee-dark);
+    margin-bottom: 0.5rem;
+}
+
+.feature-card .icon { 
+    font-size: 2.5rem; 
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.social-proof {
+    background: var(--coffee-dark);
+    color: #fff;
+    padding: 5rem 10%;
+    text-align: center;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 3rem;
+}
+
+.stats strong { 
+    font-size: 2.5rem; 
+    display: block; 
+    color: var(--brand); 
+}
+
+.stats span { 
+    color: #c9b7ad; 
+    text-transform: uppercase; 
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+    .hero-section h1 { font-size: 2.5rem; }
+    .navbar nav { display: none; }
+    .stats { flex-direction: column; gap: 2rem; }
+}

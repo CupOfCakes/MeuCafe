@@ -1,0 +1,184 @@
+:root {
+    --brand-blue: #7c9dff; /* Seguindo o tom do botão do exemplo */
+    --bg-gray: #f9f9fb;
+    --text-dark: #1d1d1f;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #fff;
+    color: var(--text-dark);
+}
+
+/* Header & Banner */
+.banner {
+    height: 280px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-main {
+    text-align: center;
+    margin-top: -60px;
+    margin-bottom: 40px;
+}
+
+.avatar-container {
+    display: inline-block;
+    padding: 5px;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid #000;
+}
+
+.profile-main h1 {
+    margin-top: 15px;
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+/* Layout de Colunas */
+.content-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 20px;
+    padding: 0 20px 100px;
+}
+
+/* Card de Bio */
+.bio-card {
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 25px;
+    border-radius: 15px;
+    height: fit-content;
+}
+
+.social-links {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+/* Card de Suporte (O mais fiel ao exemplo) */
+.support-card {
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+.support-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.donation-box {
+    background: #f8faff;
+    border: 1px solid #eef2ff;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.coffee-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.coffee-selector .icon { font-size: 1.5rem; }
+
+.qty {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 1px solid #d0d7de;
+    background: #fff;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.qty.active {
+    background: var(--brand-blue);
+    color: white;
+    border-color: var(--brand-blue);
+}
+
+.qty-input {
+    width: 45px;
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #d0d7de;
+    border-radius: 4px;
+}
+
+.message-area {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.message-area textarea {
+    width: 100%;
+    height: 100px;
+    padding: 12px;
+    border: 1px solid #d0d7de;
+    border-radius: 8px;
+    resize: none;
+    font-size: 0.9rem;
+}
+
+.emoji-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.private-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.btn-support {
+    width: 100%;
+    padding: 14px;
+    background: var(--brand-blue);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* Responsividade */
+@media (max-width: 850px) {
+    .content-wrapper { grid-template-columns: 1fr; }
+    .support-card { order: -1; } /* No mobile, o card de pagar vem primeiro */
+}

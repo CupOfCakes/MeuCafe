@@ -1,0 +1,128 @@
+:root {
+    --brand-yellow: #FFDD00;
+    --coffee-dark: #3d2b1f;
+    --input-bg: #f1f1f1;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+    background-color: #fff;
+    color: #111;
+}
+
+/* Header superior */
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+}
+
+.logo { font-size: 1.5rem; }
+
+.redirect { font-size: 0.9rem; color: #555; }
+.redirect a { color: #111; font-weight: 600; text-decoration: none; border-bottom: 1px solid #111; }
+
+/* Container Central */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 20px;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 30px;
+    letter-spacing: -0.5px;
+}
+
+/* Estilo dos Inputs e Botão Principal */
+.email-login input {
+    width: 100%;
+    padding: 16px;
+    background-color: var(--input-bg);
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    outline: none;
+}
+
+.btn-email {
+    width: 100%;
+    padding: 16px;
+    background-color: var(--brand-yellow);
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.btn-email:hover { opacity: 0.9; }
+
+/* Divisor */
+.divider {
+    margin: 25px 0;
+    color: #888;
+    font-size: 0.85rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.divider::before, .divider::after {
+    content: "";
+    height: 1px;
+    background-color: #eee;
+    flex-grow: 1;
+}
+
+/* Botões Sociais */
+.social-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-social {
+    width: 100%;
+    padding: 12px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-social img { width: 18px; height: 18px; }
+
+.btn-social:hover { background-color: #f9f9f9; }
+
+@media (max-width: 480px) {
+    .top-nav { padding: 20px; }
+}
