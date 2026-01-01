@@ -1,3 +1,4 @@
+using Application.UseCases.Users;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MeuCafe.Controllers;
@@ -6,16 +7,6 @@ namespace MeuCafe.Controllers;
 [Route("api/{controller}")]
 public class RequestsController : ControllerBase
 {
-    [HttpGet]
-    public IActionResult GetAll()
-    {
-        return Ok("list");
-    }
-
-    [HttpPost]
-    public IActionResult CreateNewUser()
-    {
-     return Ok("sex on the beach");   
-    }
+    private readonly ListUsersUseCase _listUsersUseCase;
     
 }
