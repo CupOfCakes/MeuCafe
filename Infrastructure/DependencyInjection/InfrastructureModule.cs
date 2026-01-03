@@ -20,7 +20,7 @@ public static class InfrastructureModule
                 )
         );
 
-        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IClientRepository, ClientRepository>();
 
         return services;
     }
