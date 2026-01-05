@@ -1,5 +1,6 @@
 using Application.UseCases.Clients;
 using Infrastructure.Persistence.Context;
+using Application.UseCases.Clients.List;
 using Domain.Repositories;
 using Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;

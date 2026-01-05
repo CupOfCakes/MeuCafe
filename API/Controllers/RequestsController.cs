@@ -1,4 +1,5 @@
-using Application.UseCases.Clients;
+using Application.UseCases.Clients.List;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MeuCafe.Controllers;

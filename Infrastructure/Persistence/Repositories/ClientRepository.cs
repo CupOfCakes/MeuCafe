@@ -18,4 +18,10 @@ public class ClientRepository : IClientRepository
     {
         return await _context.Clients.ToListAsync();
     }
+
+    public async Task<string> CreateNewClient(Client client)
+    {
+        // implementação
+        return "ok";
+    }
 }
