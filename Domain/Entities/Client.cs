@@ -22,4 +22,14 @@ public class Client
 
     public DateTime CreatedAt {get; init;}
 
+    public Client() { }
+
+    public Client(string name, string email, string hashPassword)
+    {
+        Id = Guid.NewGuid();
+        Name = name;
+        Email = email;
+        HashPassword = hashPassword;
+    }
+
 }
