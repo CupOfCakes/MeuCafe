@@ -4,6 +4,8 @@ using Application.UseCases.Clients.List;
 using Domain.Repositories;
 using Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Domain.Security;
+using Infrastructure.Security;
 
 DotNetEnv.Env.Load("../.env");
 
@@ -32,6 +34,8 @@ builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<IPasswordHasher, Pbkdf2PasswordHasher>();
 
 var app = builder.Build();
 
