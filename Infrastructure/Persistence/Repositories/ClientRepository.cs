@@ -19,9 +19,10 @@ public class ClientRepository : IClientRepository
         return await _context.Clients.ToListAsync();
     }
 
-    public async Task<string> CreateNewClient(Client client)
+    public async Task CreateNewClient(Client client)
     {
         // implementação
-        return "ok";
+        await _context.Clients.AddAsync(client);
+        await _context.SaveChangesAsync();
     }
 }
