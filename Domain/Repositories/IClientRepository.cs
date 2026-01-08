@@ -7,5 +7,5 @@ public interface IClientRepository
 {
     Task<IEnumerable<Client>> GetAllAsync();
 
-    Task<string> CreateNewClient(Client client);
+    Task CreateNewClient(Client client);
 }
