@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MeuCafe.Controllers;
 
 [ApiController]
-[Route("api/requests")]
+[Route("api/client")]
 public class RequestsController : ControllerBase
 {
     private readonly ListClientsUseCase _listClientsUseCase;
@@ -25,7 +25,7 @@ public class RequestsController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPost]
+    [HttpPost(Name = "CreateClient")]
     public async Task<ActionResult<ClientCreatedDTO>> CreateNewClient(
         [FromBody] ClientCreateRequestDTO dto)
     {
