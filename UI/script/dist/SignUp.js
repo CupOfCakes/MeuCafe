@@ -20,7 +20,7 @@ btnContinue.addEventListener("click", () => __awaiter(void 0, void 0, void 0, fu
         return;
     }
     try {
-        const response = yield fetch("http://localhost:5057/api/", {
+        const response = yield fetch("http://localhost:5057/api/client/CreateClient", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

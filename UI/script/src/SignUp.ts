@@ -14,7 +14,7 @@ btnContinue.addEventListener("click", async () => {
     }
 
     try{
-        const response = await fetch("http://localhost:5057/api/", {
+        const response = await fetch("http://localhost:5057/api/client/CreateClient", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
