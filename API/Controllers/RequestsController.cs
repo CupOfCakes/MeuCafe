@@ -1,6 +1,7 @@
 using Application.UseCases.Clients.List;
 using Application.UseCases.Clients.Create;
 using Domain.Entities;
+using Domain.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MeuCafe.Controllers;
@@ -29,9 +30,27 @@ public class RequestsController : ControllerBase
     public async Task<ActionResult<ClientCreatedDTO>> CreateNewClient(
         [FromBody] ClientCreateRequestDTO dto)
     {
-        var result = await _createClientUseCase.ExecuteAsync(dto);
+        try
+        {
+            var result = await _createClientUseCase.ExecuteAsync(dto);
 
-        return Created(result.URL, result);
+            return Created(result.URL, result);
+        }
+        catch (DomainException ex)
+        {
+            return BadRequest(new
+            {
+                error = ex.Message
+            });
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, new
+            {
+                error = "Internal server error"
+            });
+        }
+        
     }
 
 }
