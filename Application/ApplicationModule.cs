@@ -4,7 +4,7 @@ using Application.UseCases.Clients.List;
 
 namespace Application;
 
-public static class DependencyInjection
+public static class ApplicationModule
 {
 	public static IServiceCollection AddApplication(this IServiceCollection services)
 	{

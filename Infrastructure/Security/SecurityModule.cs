@@ -5,7 +5,7 @@ using Infrastructure.Security;
 
 namespace Infrastructure.Security;
 
-public static class DependencyInjection
+public static class SecurityModule
 {
 	public static IServiceCollection AddSecurity(this IServiceCollection services)
 	{
