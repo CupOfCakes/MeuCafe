@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.DependencyInjection;
+namespace Infrastructure;
 
 public static class InfrastructureModule
 {

@@ -1,10 +1,5 @@
-using Application.UseCases.Clients;
-using Infrastructure.Persistence.Context;
-using Application.UseCases.Clients.List;
-using Domain.Repositories;
-using Infrastructure.Persistence.Repositories;
-using Microsoft.EntityFrameworkCore;
-using Domain.Security;
+using Application;
+using Infrastructure;
 using Infrastructure.Security;
 
 DotNetEnv.Env.Load("../.env");
@@ -21,21 +16,14 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-{
-    options.UseNpgsql(
-        builder.Configuration.GetConnectionString("DefaultConnection")
-    );
-});
-
-builder.Services.AddScoped<ListClientsUseCase>();
-builder.Services.AddScoped<IClientRepository, ClientRepository>();
-
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddControllers();
 
-builder.Services.AddScoped<IPasswordHasher, Pbkdf2PasswordHasher>();
+builder.Services
+    .AddApplication()
+    .AddInfrastructure(builder.Configuration)
+    .AddSecurity();
 
 var app = builder.Build();
 
