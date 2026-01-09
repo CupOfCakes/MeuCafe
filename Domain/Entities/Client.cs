@@ -26,10 +26,21 @@ public class Client
 
     public Client(string name, string email, string hashPassword)
     {
+        if(string.IsNullOrWhiteSpace(name)) 
+            throw new EmptyClientNameException();
+
+        if (string.IsNullOrWhiteSpace(email) ||
+            !new EmailAddressAttribute().IsValid(email))
+            throw new InvalidEmailException();
+
+        if (string.IsNullOrWhiteSpace(hashPassword))
+            throw new EmptyPasswordException();
+
         Id = Guid.NewGuid();
         Name = name;
         Email = email;
         HashPassword = hashPassword;
+        CreatedAt = DateTime.UtcNow;
     }
 
 }
