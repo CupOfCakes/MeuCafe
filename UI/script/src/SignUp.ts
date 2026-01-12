@@ -1,7 +1,7 @@
 const btnContinue = document.getElementById("btnContinue") as HTMLButtonElement;
-const usernameInput = document.getElementById("username") as HTMLButtonElement;
-const emailInput = document.getElementById("email") as HTMLButtonElement;
-const passwordInput = document.getElementById("password") as HTMLButtonElement;
+const usernameInput = document.getElementById("username") as HTMLInputElement;
+const emailInput = document.getElementById("email") as HTMLInputElement;
+const passwordInput = document.getElementById("password") as HTMLInputElement;
 
 btnContinue.addEventListener("click", async () => {
     const username: string = usernameInput.value;
