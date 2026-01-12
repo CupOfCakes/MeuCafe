@@ -7,7 +7,7 @@ namespace Infrastructure.Persistence.Context;
 
 public class AppDbContext : DbContext
 {
-    public DbSet<Client> Clients => Set<Client>();
+    public DbSet<Client> Clients { get; set; }
 
     public AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options)
