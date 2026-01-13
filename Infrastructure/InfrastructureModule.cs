@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Application.UseCases.Clients.Create;
+using Application.UseCases.Clients.Delete;
 using Domain.Security;
 using Application.UseCases.Clients.List;
 
@@ -27,6 +28,7 @@ public static class InfrastructureModule
         services.AddScoped<IClientRepository, ClientRepository>();
         services.AddScoped<ListClientsUseCase>();
         services.AddScoped<CreateClientUseCase>();
+        services.AddScoped<DeleteClientUseCase>();
         services.AddScoped<IPasswordHasher, Pbkdf2PasswordHasher>();
 
         return services;
