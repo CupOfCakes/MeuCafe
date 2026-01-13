@@ -1,6 +1,7 @@
 using Domain.Repositories;
 using Domain.Entities;
 using Domain.Exceptions;
+using Application.Exceptions;
 using Infrastructure.Persistence.Context;
 using Infrastructure.Persistence.Constraints;
 using Microsoft.EntityFrameworkCore;
@@ -44,8 +45,14 @@ public class ClientRepository : IClientRepository
 
     public async Task DeleteClientById(Guid id)
     {
-        await _context.Clients
-            .Where(c => c.Id == id)
-            .ExecuteDeleteAsync();
+
+        await using var transaction = await _context.Database.BeginTransactionAsync();
+
+        var rowsAffected = await _context.Clients
+                              .Where(c => c.Id == id)
+                              .ExecuteDeleteAsync();
+
+        if (rowsAffected == 0) throw new ClientNotFoundException();
+
     }
 }
