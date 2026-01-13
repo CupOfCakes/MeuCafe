@@ -1,12 +1,12 @@
-using Application.UseCases.Clients;
-using Infrastructure.Persistence.Context;
-using Domain.Repositories;
-using Infrastructure.Persistence.Repositories;
-using Microsoft.EntityFrameworkCore;
+using Application;
+using Infrastructure;
+using Infrastructure.Security;
 
 DotNetEnv.Env.Load("../.env");
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Configuration.AddEnvironmentVariables();
 
 builder.Services.AddCors(options =>
 {
@@ -18,19 +18,14 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-{
-    options.UseNpgsql(
-        builder.Configuration.GetConnectionString("DefaultConnection")
-    );
-});
-
-builder.Services.AddScoped<ListClientsUseCase>();
-builder.Services.AddScoped<IClientRepository, ClientRepository>();
-
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddControllers();
+
+builder.Services
+    .AddApplication()
+    .AddInfrastructure(builder.Configuration)
+    .AddSecurity();
 
 var app = builder.Build();
 

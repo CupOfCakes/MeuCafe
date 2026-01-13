@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Common;
+using Domain.Exceptions;
 
 namespace Domain.Entities;
 
@@ -21,5 +22,26 @@ public class Client
     public string BackgroundPicURL {get; set;} = string.Empty;
 
     public DateTime CreatedAt {get; init;}
+
+    public Client() { }
+
+    public Client(string name, string email, string hashPassword)
+    {
+        if(string.IsNullOrWhiteSpace(name)) 
+            throw new EmptyClientNameException();
+
+        if (string.IsNullOrWhiteSpace(email) ||
+            !new EmailAddressAttribute().IsValid(email))
+            throw new InvalidEmailException();
+
+        if (string.IsNullOrWhiteSpace(hashPassword))
+            throw new EmptyPasswordException();
+
+        Id = Guid.NewGuid();
+        Name = name;
+        Email = email;
+        HashPassword = hashPassword;
+        CreatedAt = DateTime.UtcNow;
+    }
 
 }

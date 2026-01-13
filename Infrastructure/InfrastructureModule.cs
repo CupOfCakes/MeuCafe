@@ -1,11 +1,15 @@
 using Infrastructure.Persistence.Context;
+using Infrastructure.Security;
 using Domain.Repositories;
 using Infrastructure.Persistence.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using Application.UseCases.Clients.Create;
+using Domain.Security;
+using Application.UseCases.Clients.List;
 
-namespace Infrastructure.DependencyInjection;
+namespace Infrastructure;
 
 public static class InfrastructureModule
 {
@@ -16,11 +20,14 @@ public static class InfrastructureModule
     {
         services.AddDbContext<AppDbContext>(options =>
             options.UseNpgsql(
-                configuration.GetConnectionString("Default")
+                configuration.GetConnectionString("DefaultConnection")
                 )
         );
 
         services.AddScoped<IClientRepository, ClientRepository>();
+        services.AddScoped<ListClientsUseCase>();
+        services.AddScoped<CreateClientUseCase>();
+        services.AddScoped<IPasswordHasher, Pbkdf2PasswordHasher>();
 
         return services;
     }

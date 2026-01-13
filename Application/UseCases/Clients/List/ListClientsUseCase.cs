@@ -1,7 +1,7 @@
 using Domain.Repositories;
 using Domain.Entities;
 
-namespace Application.UseCases.Clients;
+namespace Application.UseCases.Clients.List;
 
 public class ListClientsUseCase
 {
