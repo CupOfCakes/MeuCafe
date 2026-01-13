@@ -8,4 +8,6 @@ public interface IClientRepository
     Task<IEnumerable<Client>> GetAllAsync();
 
     Task CreateNewClient(Client client);
+
+    Task DeleteClientById(Guid id);
 }

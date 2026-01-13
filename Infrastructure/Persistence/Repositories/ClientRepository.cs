@@ -41,4 +41,11 @@ public class ClientRepository : IClientRepository
         }
         
     }
+
+    public async Task DeleteClientById(Guid id)
+    {
+        await _context.Clients
+            .Where(c => c.Id == id)
+            .ExecuteDeleteAsync();
+    }
 }

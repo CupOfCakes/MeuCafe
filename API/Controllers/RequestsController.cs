@@ -1,5 +1,6 @@
 using Application.UseCases.Clients.List;
 using Application.UseCases.Clients.Create;
+using Application.UseCases.Clients.Delete;
 using Domain.Entities;
 using Domain.Exceptions;
 using Microsoft.AspNetCore.Mvc;
@@ -12,11 +13,17 @@ public class RequestsController : ControllerBase
 {
     private readonly ListClientsUseCase _listClientsUseCase;
     private readonly CreateClientUseCase _createClientUseCase;
+    private readonly DeleteClientUseCase _deleteClientUseCase;
 
-    public RequestsController(ListClientsUseCase listClientsUseCase, CreateClientUseCase createClientUseCase)
+    public RequestsController(
+        ListClientsUseCase listClientsUseCase, 
+        CreateClientUseCase createClientUseCase, 
+        DeleteClientUseCase deleteClientUseCase
+        )
     {
         _listClientsUseCase = listClientsUseCase;
         _createClientUseCase = createClientUseCase;
+        _deleteClientUseCase = deleteClientUseCase;
     }
 
     [HttpGet("AllClients")]
@@ -51,6 +58,15 @@ public class RequestsController : ControllerBase
             });
         }
         
+    }
+
+    [HttpDelete(Name = "DeleteClientById")]
+    public async Task<IActionResult> DeleteClientById(Guid id)
+    {
+        await _deleteClientUseCase.DeleteClientById(id);
+
+        return Ok();
+
     }
 
 }
