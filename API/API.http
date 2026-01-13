@@ -4,15 +4,15 @@ GET {{API_HostAddress}}/api/client/AllClients
 
 ###
 
-POST {{API_HostAddress}}/api/client
+DELETE {{API_HostAddress}}/api/client/DeleteClientById
+
+###
+
+POST {{API_HostAddress}}/api/client/CreateClient
 Content-Type: application/json
 
 {
   //ClientCreateRequestDTO
 }
-
-###
-
-DELETE {{API_HostAddress}}/api/client
 
 ###

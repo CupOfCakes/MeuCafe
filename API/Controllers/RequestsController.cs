@@ -33,7 +33,7 @@ public class RequestsController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPost(Name = "CreateClient")]
+    [HttpPost("CreateClient")]
     public async Task<ActionResult<ClientCreatedDTO>> CreateNewClient(
         [FromBody] ClientCreateRequestDTO dto)
     {
@@ -60,7 +60,7 @@ public class RequestsController : ControllerBase
         
     }
 
-    [HttpDelete(Name = "DeleteClientById")]
+    [HttpDelete("DeleteClientById")]
     public async Task<IActionResult> DeleteClientById(Guid id)
     {
         await _deleteClientUseCase.DeleteClientById(id);
