@@ -21,7 +21,7 @@ public class Client
 
     public string BackgroundPicURL {get; set;} = string.Empty;
 
-    public DateTime CreatedAt {get; init;}
+    public DateTimeOffset CreatedAt {get; init;}
 
     public Client() { }
 
@@ -41,7 +41,7 @@ public class Client
         Name = name;
         Email = email;
         HashPassword = hashPassword;
-        CreatedAt = DateTime.UtcNow;
+        CreatedAt = DateTimeOffset.UtcNow;
     }
 
 }
