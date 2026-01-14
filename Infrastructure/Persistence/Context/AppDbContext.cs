@@ -16,17 +16,6 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Client>(entity =>
-        {
-            entity.HasIndex(c => c.Name)
-                .IsUnique()
-                .HasDatabaseName(ClientConstraints.UniqueName);
-
-            entity.HasIndex(c => c.Email)
-                .IsUnique()
-                .HasDatabaseName(ClientConstraints.UniqueEmail);
-        });
-
         modelBuilder.ApplyConfigurationsFromAssembly(
             typeof(AppDbContext).Assembly
         );

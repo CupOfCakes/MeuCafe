@@ -1,11 +1,12 @@
-using System.Runtime.CompilerServices;
 using Domain.Entities;
+using Infrastructure.Persistence.Constraints;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Runtime.CompilerServices;
 
 namespace Infrastructure.Persistence.Mappings;
 
-public class UserMap : IEntityTypeConfiguration<Client>
+public class ClientMap : IEntityTypeConfiguration<Client>
 {
     public void Configure(EntityTypeBuilder<Client> builder)
     {
@@ -13,49 +14,56 @@ public class UserMap : IEntityTypeConfiguration<Client>
         builder.ToTable("clients");
         
         //PK ID
-        builder.HasKey(u => u.Id);
+        builder.HasKey(c => c.Id);
 
-        builder.Property(u => u.Id)
+        builder.Property(c => c.Id)
             .HasColumnName("id")
-            .IsRequired();
-        
+            .IsRequired()
+            .ValueGeneratedNever();
+
         //NAME
-        builder.Property(u => u.Name)
+        builder.Property(c => c.Name)
             .HasColumnName("name")
             .IsRequired()
             .HasMaxLength(50);
-        
+
+        builder.HasIndex(c => c.Name)
+            .IsUnique()
+            .HasDatabaseName(ClientConstraints.UniqueName);
+
         //EMAIL
-        builder.Property(u => u.Email)
+        builder.Property(c => c.Email)
             .HasColumnName("email")
             .IsRequired()
             .HasMaxLength(255);
 
-        
-        
+        builder.HasIndex(c => c.Email)
+            .IsUnique()
+            .HasDatabaseName(ClientConstraints.UniqueEmail);
+
         //HASHPASSWORD
-        builder.Property(u => u.HashPassword)
+        builder.Property(c => c.HashPassword)
             .HasColumnName("hash_password")
             .IsRequired()
             .HasMaxLength(255);
-        
+
         //DESCRIPTION
-        builder.Property(u => u.Description)
+        builder.Property(c => c.Description)
             .HasColumnName("description");
             
         //PROFILE PIC URL
-        builder.Property(u => u.ProfilePicURL)
+        builder.Property(c => c.ProfilePicURL)
             .HasColumnName("profile_pic_url");
 
         //BACKGROUND PIC URL
-        builder.Property(u => u.BackgroundPicURL)
+        builder.Property(c => c.BackgroundPicURL)
             .HasColumnName("background_pic_url");
 
         //CREATE AT
-        builder.Property(u => u.CreatedAt)
+        builder.Property(c => c.CreatedAt)
             .HasColumnName("created_at")
-            .IsRequired()
-            .HasDefaultValueSql("GETDATE()");
+            .HasColumnType("timestamptz")
+            .IsRequired();
 
     }
 }

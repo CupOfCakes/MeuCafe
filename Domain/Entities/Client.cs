@@ -7,7 +7,7 @@ namespace Domain.Entities;
 
 public class Client
 {
-    public Guid Id{get; init;}
+    public Guid Id{get; init;} = Guid.NewGuid();
 
     public string Name{get; set;} = string.Empty;
 
@@ -21,7 +21,7 @@ public class Client
 
     public string BackgroundPicURL {get; set;} = string.Empty;
 
-    public DateTimeOffset CreatedAt {get; init;}
+    public DateTimeOffset CreatedAt {get; init;} = DateTimeOffset.UtcNow;
 
     public Client() { }
 
@@ -37,11 +37,9 @@ public class Client
         if (string.IsNullOrWhiteSpace(hashPassword))
             throw new EmptyPasswordException();
 
-        Id = Guid.NewGuid();
         Name = name;
         Email = email;
         HashPassword = hashPassword;
-        CreatedAt = DateTimeOffset.UtcNow;
     }
 
 }
