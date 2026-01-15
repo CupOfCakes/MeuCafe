@@ -1,6 +1,7 @@
 using Application;
 using Infrastructure;
 using Infrastructure.Security;
+using MeuCafe.Handlers;
 
 DotNetEnv.Env.Load("../.env");
 
@@ -27,6 +28,9 @@ builder.Services
     .AddInfrastructure(builder.Configuration)
     .AddSecurity();
 
+builder.Services.AddExceptionHandler<ExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 var app = builder.Build();
 
 app.UseCors();
@@ -38,6 +42,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapControllers();
+app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
 app.Run();
