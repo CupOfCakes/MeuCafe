@@ -39,42 +39,20 @@ public class RequestsController : ControllerBase
     public async Task<ActionResult<ClientCreatedDTO>> CreateNewClient(
         [FromBody] ClientCreateRequestDTO dto)
     {
-        try
-        {
-            var result = await _createClientUseCase.ExecuteAsync(dto);
+       
+        var result = await _createClientUseCase.ExecuteAsync(dto);
 
-            return Created(result.URL, result);
-        }
-        catch (DomainException ex)
-        {
-            return BadRequest(new
-            {
-                error = ex.Message
-            });
-        }
-        catch (Exception)
-        {
-            return StatusCode(500, new
-            {
-                error = "Internal server error"
-            });
-        }
+        return Created(result.URL, result);
         
     }
 
     [HttpDelete("DeleteClientById")]
     public async Task<IActionResult> DeleteClientById(Guid id)
     {
-        try
-        {
-            await _deleteClientUseCase.DeleteClientById(id);
+        
+        await _deleteClientUseCase.DeleteClientById(id);
 
-            return Ok();
-        }
-        catch (BusinessException ex) { return BadRequest(ex.Message); }
-        catch (ClientNotFoundException ex) { return NotFound(ex.Message); }
-        catch (DbUpdateException ex) { return Conflict(ex.Message); }
-        catch (UnexpectedException ex) { return  StatusCode(500, ex.Message); }
+        return NoContent();
     }
 
 }
