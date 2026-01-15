@@ -6,6 +6,6 @@ namespace Domain.Exceptions;
 
 public sealed class BusinessException : DomainException
 {
-    public BusinessException()
-        : base("bussiness rules violated") { }
+    public BusinessException(string msg)
+        : base(msg) { }
 }
