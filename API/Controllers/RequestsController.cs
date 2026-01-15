@@ -4,6 +4,8 @@ using Application.UseCases.Clients.Delete;
 using Domain.Entities;
 using Domain.Exceptions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Application.Exceptions;
 
 namespace MeuCafe.Controllers;
 
@@ -63,10 +65,16 @@ public class RequestsController : ControllerBase
     [HttpDelete("DeleteClientById")]
     public async Task<IActionResult> DeleteClientById(Guid id)
     {
-        await _deleteClientUseCase.DeleteClientById(id);
+        try
+        {
+            await _deleteClientUseCase.DeleteClientById(id);
 
-        return Ok();
-
+            return Ok();
+        }
+        catch (BusinessException ex) { return BadRequest(ex.Message); }
+        catch (ClientNotFoundException ex) { return NotFound(ex.Message); }
+        catch (DbUpdateException ex) { return Conflict(ex.Message); }
+        catch (UnexpectedException ex) { return  StatusCode(500, ex.Message); }
     }
 
 }
