@@ -73,5 +73,8 @@ public class ClientMap : IEntityTypeConfiguration<Client>
             .IsRequired()
             .HasDefaultValue(true);
 
+        //FILTER
+        builder.HasQueryFilter(c => c.IsActive);
+
     }
 }
