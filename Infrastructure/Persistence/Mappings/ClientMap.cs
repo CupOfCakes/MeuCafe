@@ -63,7 +63,15 @@ public class ClientMap : IEntityTypeConfiguration<Client>
         builder.Property(c => c.CreatedAt)
             .HasColumnName("created_at")
             .HasColumnType("timestamptz")
-            .IsRequired();
+            .IsRequired()
+            .HasDefaultValueSql("now()");
+
+        //IS ACTIVE
+        builder.Property(c => c.IsActive)
+            .HasColumnName("is_active")
+            .HasColumnType("boolean")
+            .IsRequired()
+            .HasDefaultValue(true);
 
     }
 }

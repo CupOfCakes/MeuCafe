@@ -23,6 +23,8 @@ public class Client
 
     public DateTimeOffset CreatedAt {get; init;} = DateTimeOffset.UtcNow;
 
+    public bool IsActive { get; set; } = true;
+
     public Client() { }
 
     public Client(string name, string email, string hashPassword)
