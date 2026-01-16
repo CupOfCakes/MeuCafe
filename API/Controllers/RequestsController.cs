@@ -28,7 +28,7 @@ public class RequestsController : ControllerBase
         _deleteClientUseCase = deleteClientUseCase;
     }
 
-    [HttpGet("AllClients")]
+    [HttpGet("AllActiveClients")]
     public async Task<IActionResult> GetAllClients()
     {
         var result = await _listClientsUseCase.ExecuteAsync();
