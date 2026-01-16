@@ -1,6 +1,7 @@
 using Domain.Repositories;
 using Domain.Entities;
 using Domain.Exceptions;
+using Application.Exceptions;
 using Infrastructure.Persistence.Context;
 using Infrastructure.Persistence.Constraints;
 using Microsoft.EntityFrameworkCore;
@@ -44,8 +45,33 @@ public class ClientRepository : IClientRepository
 
     public async Task DeleteClientById(Guid id)
     {
-        await _context.Clients
-            .Where(c => c.Id == id)
-            .ExecuteDeleteAsync();
+        bool pending = await _context.Payments
+            .AnyAsync(p => p.SenderId == id && p.Status == Domain.Enums.PaymentStatus.PENDING);
+
+        if (pending) 
+            throw new BusinessException("CLient have a payment pending");
+
+        await using var transaction = await _context.Database.BeginTransactionAsync();
+
+        try
+        {
+            var rowsAffected = await _context.Clients
+                              .Where(c => c.Id == id)
+                              .ExecuteUpdateAsync(
+                                setters => setters.SetProperty(
+                                    c => c.IsActive, false));
+
+            if (rowsAffected == 0) throw new ClientNotFoundException();
+
+            if (rowsAffected > 1) throw new UnexpectedException("Multiple users affected");
+
+            await transaction.CommitAsync();
+        }
+        catch
+        {
+            throw;
+        }
+        
+
     }
 }

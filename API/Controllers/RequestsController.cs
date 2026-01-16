@@ -4,6 +4,8 @@ using Application.UseCases.Clients.Delete;
 using Domain.Entities;
 using Domain.Exceptions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Application.Exceptions;
 
 namespace MeuCafe.Controllers;
 
@@ -26,7 +28,7 @@ public class RequestsController : ControllerBase
         _deleteClientUseCase = deleteClientUseCase;
     }
 
-    [HttpGet("AllClients")]
+    [HttpGet("AllActiveClients")]
     public async Task<IActionResult> GetAllClients()
     {
         var result = await _listClientsUseCase.ExecuteAsync();
@@ -37,36 +39,20 @@ public class RequestsController : ControllerBase
     public async Task<ActionResult<ClientCreatedDTO>> CreateNewClient(
         [FromBody] ClientCreateRequestDTO dto)
     {
-        try
-        {
-            var result = await _createClientUseCase.ExecuteAsync(dto);
+       
+        var result = await _createClientUseCase.ExecuteAsync(dto);
 
-            return Created(result.URL, result);
-        }
-        catch (DomainException ex)
-        {
-            return BadRequest(new
-            {
-                error = ex.Message
-            });
-        }
-        catch (Exception)
-        {
-            return StatusCode(500, new
-            {
-                error = "Internal server error"
-            });
-        }
+        return Created(result.URL, result);
         
     }
 
     [HttpDelete("DeleteClientById")]
     public async Task<IActionResult> DeleteClientById(Guid id)
     {
+        
         await _deleteClientUseCase.DeleteClientById(id);
 
-        return Ok();
-
+        return NoContent();
     }
 
 }
