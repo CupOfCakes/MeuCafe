@@ -57,7 +57,9 @@ public class ClientRepository : IClientRepository
         {
             var rowsAffected = await _context.Clients
                               .Where(c => c.Id == id)
-                              .ExecuteDeleteAsync();
+                              .ExecuteUpdateAsync(
+                                setters => setters.SetProperty(
+                                    c => c.IsActive, false));
 
             if (rowsAffected == 0) throw new ClientNotFoundException();
 
