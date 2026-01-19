@@ -2,6 +2,7 @@ using Application;
 using Infrastructure;
 using Infrastructure.Security;
 using MeuCafe.Handlers;
+using MeuCafe.Hosted;
 
 DotNetEnv.Env.Load("../.env");
 
@@ -30,6 +31,8 @@ builder.Services
 
 builder.Services.AddExceptionHandler<ExceptionHandler>();
 builder.Services.AddProblemDetails();
+
+builder.Services.AddHostedService<WarmupHostedService>();
 
 var app = builder.Build();
 
