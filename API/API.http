@@ -1,6 +1,6 @@
 @API_HostAddress = http://localhost:5057
 
-GET {{API_HostAddress}}/api/client/AllClients
+GET {{API_HostAddress}}/api/client/AllActiveClients
 
 ###
 
@@ -14,5 +14,9 @@ Content-Type: application/json
 {
   //ClientCreateRequestDTO
 }
+
+###
+
+GET {{API_HostAddress}}/system/warmup
 
 ###

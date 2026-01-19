@@ -9,6 +9,7 @@ using Application.UseCases.Clients.Create;
 using Application.UseCases.Clients.Delete;
 using Domain.Security;
 using Application.UseCases.Clients.List;
+using Application.Repositories;
 
 namespace Infrastructure;
 
@@ -26,6 +27,7 @@ public static class InfrastructureModule
         );
 
         services.AddScoped<IClientRepository, ClientRepository>();
+        services.AddScoped<IWarmupService, SystemRepository>();
         services.AddScoped<ListClientsUseCase>();
         services.AddScoped<CreateClientUseCase>();
         services.AddScoped<DeleteClientUseCase>();
