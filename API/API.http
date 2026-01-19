@@ -16,3 +16,7 @@ Content-Type: application/json
 }
 
 ###
+
+GET {{API_HostAddress}}/system/warmup
+
+###
