@@ -17,10 +17,9 @@ namespace Infrastructure.Persistence.Repositories
             (DbSet<TEntiyy> table) 
             where TEntiyy : class
         {
-            if(await table.AnyAsync())
-            {
-                _ = await table.AsNoTracking().FirstOrDefaultAsync();
-            }
+            await table.AsNoTracking()
+                .TagWith("Warmup Query")
+                .FirstOrDefaultAsync();
         }
 
         public SystemRepository(AppDbContext context)
@@ -34,11 +33,15 @@ namespace Infrastructure.Persistence.Repositories
 
             _ = _context.Model;
 
-            await _context.Database.ExecuteSqlRawAsync("SELECT 1");
 
-            await WarmupTableAsync(_context.Clients);
-            await WarmupTableAsync(_context.Payments);
+            var tasks = new List<Task>
+            {
+                WarmupTableAsync(_context.Clients),
+                WarmupTableAsync(_context.Payments),
+                _context.Database.ExecuteSqlRawAsync("SELECT 1")
+            };
 
+            await Task.WhenAll(tasks);
         }
     }
 }
