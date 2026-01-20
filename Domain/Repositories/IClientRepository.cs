@@ -9,5 +9,5 @@ public interface IClientRepository
 
     Task CreateNewClient(Client client);
 
-    Task DeleteClientById(Guid id);
+    Task<int> DeleteClientById(Guid id);
 }

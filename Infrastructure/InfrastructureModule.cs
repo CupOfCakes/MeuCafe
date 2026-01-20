@@ -32,6 +32,7 @@ public static class InfrastructureModule
         services.AddScoped<CreateClientUseCase>();
         services.AddScoped<DeleteClientUseCase>();
         services.AddScoped<IPasswordHasher, Pbkdf2PasswordHasher>();
+        services.AddScoped<IPaymentRepository, PaymentRepository>();
 
         return services;
     }
