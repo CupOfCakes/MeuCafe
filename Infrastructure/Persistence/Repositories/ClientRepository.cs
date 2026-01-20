@@ -43,14 +43,9 @@ public class ClientRepository : IClientRepository
         
     }
 
-    public async Task DeleteClientById(Guid id)
+    public async Task<int> DeleteClientById(Guid id)
     {
-        bool pending = await _context.Payments
-            .AnyAsync(p => p.SenderId == id && p.Status == Domain.Enums.PaymentStatus.PENDING);
-
-        if (pending) 
-            throw new BusinessException("CLient have a payment pending");
-
+        
         await using var transaction = await _context.Database.BeginTransactionAsync();
 
         try
@@ -61,11 +56,11 @@ public class ClientRepository : IClientRepository
                                 setters => setters.SetProperty(
                                     c => c.IsActive, false));
 
-            if (rowsAffected == 0) throw new ClientNotFoundException();
-
             if (rowsAffected > 1) throw new UnexpectedException("Multiple users affected");
 
             await transaction.CommitAsync();
+
+            return rowsAffected;
         }
         catch
         {
