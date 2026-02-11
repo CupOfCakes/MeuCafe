@@ -1,6 +1,9 @@
 ﻿using Application.Repositories;
+using Domain.Entities;
 using Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics.Internal;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,37 +14,43 @@ namespace Infrastructure.Persistence.Repositories
 {
     public class SystemRepository : IWarmupService
     {
-        private readonly AppDbContext _context;
+        private readonly IServiceScopeFactory _scopeFactory;
 
-        private async Task WarmupTableAsync<TEntiyy>
-            (DbSet<TEntiyy> table) 
-            where TEntiyy : class
+        public SystemRepository(IServiceScopeFactory scopeFactory)
         {
-            await table.AsNoTracking()
-                .TagWith("Warmup Query")
-                .FirstOrDefaultAsync();
-        }
-
-        public SystemRepository(AppDbContext context)
-        {
-            _context = context;
+            _scopeFactory = scopeFactory;
         }
 
         public async Task ExecuteAsync()
         {
-            await _context.Database.OpenConnectionAsync();
-
-            _ = _context.Model;
-
-
             var tasks = new List<Task>
             {
-                WarmupTableAsync(_context.Clients),
-                WarmupTableAsync(_context.Payments),
-                _context.Database.ExecuteSqlRawAsync("SELECT 1")
+                WarmupTableAsync<Client>(),
+                WarmupTableAsync<Payment>(),
+                RunRawSqlWarmupAsync("SELECT 1")
             };
 
             await Task.WhenAll(tasks);
+        }
+
+        private async Task WarmupTableAsync<TEntity>()
+            where TEntity : class
+        {
+            using var scope = _scopeFactory.CreateScope();
+            var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+            await context.Set<TEntity>()
+                .AsNoTracking()
+                .TagWith($"Warmup {typeof(TEntity).Name}")
+                .FirstOrDefaultAsync();
+        }
+
+        private async Task RunRawSqlWarmupAsync(string command)
+        {
+            using var scope = _scopeFactory.CreateScope();
+            var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+            await context.Database.ExecuteSqlRawAsync(command);
         }
     }
 }
