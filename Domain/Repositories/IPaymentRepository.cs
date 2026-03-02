@@ -9,8 +9,6 @@ namespace Domain.Repositories
 {
     public interface IPaymentRepository
     {
-        Task<bool> AnyPendingByClientId(Guid id);
-
         Task<Payment> CreatePayment(Payment payment);
     }
 }

@@ -21,14 +21,6 @@ namespace Infrastructure.Persistence.Repositories
             _context = context;
         }
 
-        public async Task<bool> AnyPendingByClientId(Guid id)
-        {
-            bool pending = await _context.Payments
-            .AnyAsync(p => p.SenderId == id && p.Status == Domain.Enums.PaymentStatus.PENDING);
-
-            return pending;
-        }
-
         public async Task<Payment> CreatePayment(Payment payment)
         {
             var confirmUrl = $"https://MeuCafe.com/api/payment/{payment.PixTxId}/confirm";
