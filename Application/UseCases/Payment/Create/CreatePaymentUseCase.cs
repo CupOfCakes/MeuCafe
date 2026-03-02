@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.UseCases.Payment.Create
 {
-    internal class CreatePaymentUseCase
+    public class CreatePaymentUseCase
     {
         private readonly IPaymentRepository _paymentRepository;
 
