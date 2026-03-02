@@ -11,6 +11,6 @@ namespace Domain.Repositories
     {
         Task<bool> AnyPendingByClientId(Guid id);
 
-        Task CreatePayment(Payment payment);
+        Task<Payment> CreatePayment(Payment payment);
     }
 }

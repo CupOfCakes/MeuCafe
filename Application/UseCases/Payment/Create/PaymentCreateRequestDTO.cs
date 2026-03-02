@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Application.UseCases.Payment.Create
 {
-    internal class PaymentCreateRequestDTO
+    public class PaymentCreateRequestDTO
     {
         public Guid RecipientId { get; set; }
-        public decimal value { get; set; }
+        public decimal Value { get; set; }
     }
 }

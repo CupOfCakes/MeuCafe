@@ -10,10 +10,8 @@ namespace Domain.Entities
     public class Payment
     {
         public Guid Id { get; set; } = Guid.NewGuid();
-        public Guid SenderId { get; set; }
-        public required Client Sender { get; set; }
         public Guid RecipientId { get; set; }
-        public required Client Recipient { get; set; }
+        public Client Recipient { get; set; }
         public decimal Value { get; set; }
         public PaymentStatus Status { get; set; } = PaymentStatus.PENDING;
         public string PixTxId { get; set; } = string.Empty;
@@ -23,5 +21,14 @@ namespace Domain.Entities
         public DateTimeOffset? ConfirmedAt { get; set; }
         public DateTimeOffset? ReversedAt { get; set; }
         public string? UrlProof { get; set; }
+
+        public Payment() { }
+
+        public Payment(Guid _RecipientId, decimal value)
+        {
+            this.RecipientId = _RecipientId;
+            this.Value = value;
+        }
     }
+
 }
