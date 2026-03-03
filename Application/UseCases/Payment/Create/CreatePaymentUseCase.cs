@@ -13,7 +13,6 @@ namespace Application.UseCases.Payment.Create
         private readonly IPaymentRepository _paymentRepository;
 
         public CreatePaymentUseCase(
-            Guid SenderId,
             IPaymentRepository paymentRepository)
         {
             _paymentRepository = paymentRepository;

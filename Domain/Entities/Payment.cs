@@ -11,7 +11,7 @@ namespace Domain.Entities
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public Guid RecipientId { get; set; }
-        public Client Recipient { get; set; }
+        public Client? Recipient { get; set; }
         public decimal Value { get; set; }
         public PaymentStatus Status { get; set; } = PaymentStatus.PENDING;
         public string PixTxId { get; set; } = string.Empty;
