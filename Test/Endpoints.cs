@@ -8,11 +8,11 @@ using Application.UseCases.Clients.Create;
 
 namespace Test;
 
-public class Endpoints : IClassFixture<WebApplicationFactory<Program>>
+public class Endpoints : IClassFixture<TesteApiFactory>
 {
     private readonly HttpClient _client;
 
-    public Endpoints(WebApplicationFactory<Program> factory)
+    public Endpoints(TesteApiFactory factory)
     {
         _client = factory.CreateClient();
     }
