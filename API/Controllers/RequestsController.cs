@@ -22,14 +22,12 @@ public class RequestsController : ControllerBase
     public RequestsController(
         ListClientsUseCase listClientsUseCase, 
         CreateClientUseCase createClientUseCase, 
-        DeleteClientUseCase deleteClientUseCase,
-        CreatePaymentUseCase createPaymentUseCase
+        DeleteClientUseCase deleteClientUseCase
         )
     {
         _listClientsUseCase = listClientsUseCase;
         _createClientUseCase = createClientUseCase;
         _deleteClientUseCase = deleteClientUseCase;
-        _createPaymentUseCase = createPaymentUseCase;
     }
 
     [HttpGet("AllActiveClients")]
@@ -59,13 +57,6 @@ public class RequestsController : ControllerBase
         return NoContent();
     }
 
-    [HttpPost("CreatePayment")]
-    public async Task<ActionResult<PaymentCreateRequestDTO>> CreatePayment(
-        [FromBody] PaymentCreateRequestDTO dto)
-    {
-        var result = await _createPaymentUseCase.ExecuteAsync(dto);
-
-        return Ok(result);
-    }
+    
 
 }
